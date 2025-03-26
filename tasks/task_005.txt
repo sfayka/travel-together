@@ -1,0 +1,19 @@
+# Task ID: 5
+# Title: Develop Collaborative Notes System
+# Status: pending
+# Dependencies: 4
+# Priority: medium
+# Description: Implement functionality for users to add comments and notes to activities, enabling collaboration between trip participants.
+# Details:
+1. Create database schema for Notes model with fields: id, activity_id, user_id, content, created_at
+2. Implement API routes for notes operations:
+   - GET/POST /api/activities/[activity_id]/notes
+   - DELETE /api/notes/[note_id]
+3. Build note creation interface within activity detail view
+4. Create notes listing component showing user avatar, name, timestamp, and content
+5. Implement note deletion functionality
+6. Add real-time updates using Supabase real-time subscriptions
+7. Style all note-related components
+
+# Test Strategy:
+Test adding notes to activities and verify they appear in the UI. Test note deletion. Verify real-time updates work when another user adds a note. Test with multiple users to ensure collaborative functionality works as expected.

@@ -1,0 +1,19 @@
+# Task ID: 6
+# Title: Implement Trip Sharing and Collaboration
+# Status: pending
+# Dependencies: 5
+# Priority: medium
+# Description: Create functionality to invite collaborators to trips and manage permissions for shared trips.
+# Details:
+1. Create database schema for TripCollaborator model with fields: id, trip_id, user_id, role (owner/editor/viewer), created_at
+2. Implement API routes for trip sharing:
+   - POST /api/trips/[trip_id]/invite
+   - DELETE /api/trips/[trip_id]/collaborators/[user_id]
+3. Build collaborator invitation UI with email input
+4. Create collaborator management interface showing all trip collaborators
+5. Implement permission checks in API routes based on user role
+6. Add UI indicators showing which trips are owned vs. shared
+7. Implement email notification for trip invitations using SendGrid
+
+# Test Strategy:
+Test inviting users with valid and invalid emails. Verify invited users can access shared trips with appropriate permissions. Test permission restrictions work correctly (viewers can't edit, etc.). Verify email notifications are sent for invitations.

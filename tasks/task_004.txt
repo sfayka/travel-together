@@ -1,0 +1,19 @@
+# Task ID: 4
+# Title: Implement Activity Management
+# Status: pending
+# Dependencies: 3
+# Priority: high
+# Description: Create functionality for adding, viewing, editing, and deleting activities within trips.
+# Details:
+1. Create database schema for Activity model with fields: id, trip_id, title, description, date, time, location, created_at
+2. Implement API routes for activity CRUD operations:
+   - GET/POST /api/trips/[trip_id]/activities
+   - GET/PUT/DELETE /api/activities/[activity_id]
+3. Build activity creation form with validation
+4. Create activity listing view within trip detail page
+5. Implement activity detail view with edit/delete options
+6. Add drag-and-drop reordering of activities
+7. Style all activity-related components
+
+# Test Strategy:
+Test creating activities with valid and invalid data. Verify activities appear in the trip detail page. Test editing activity details and confirm changes persist. Verify activity deletion works correctly. Test drag-and-drop reordering functionality.

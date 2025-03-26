@@ -1,0 +1,19 @@
+# Task ID: 8
+# Title: Implement Budget Management
+# Status: pending
+# Dependencies: 3
+# Priority: low
+# Description: Create functionality for tracking and managing trip expenses and budgets.
+# Details:
+1. Create database schema for BudgetItem model with fields: id, trip_id, category, description, amount, currency, created_at
+2. Implement API routes for budget operations:
+   - GET/POST /api/trips/[trip_id]/budget
+   - PUT/DELETE /api/budget/[budget_item_id]
+3. Build budget creation form with amount, category, and description
+4. Create budget summary view showing total planned expenses by category
+5. Implement budget item listing with edit/delete functionality
+6. Add simple visualization (e.g., pie chart) for budget breakdown
+7. Style all budget-related components
+
+# Test Strategy:
+Test adding budget items with valid and invalid data. Verify budget items appear in the budget summary. Test editing and deleting budget items. Verify budget calculations and visualizations update correctly when items are added, edited, or deleted.

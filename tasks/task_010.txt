@@ -1,0 +1,21 @@
+# Task ID: 10
+# Title: Implement Email Notification System
+# Status: pending
+# Dependencies: 6
+# Priority: low
+# Description: Create functionality to send email notifications for trip updates, invitations, and activity changes.
+# Details:
+1. Set up email service integration (SendGrid or similar)
+2. Create reusable email templates for different notification types:
+   - Trip invitation
+   - New activity added
+   - Activity updated/deleted
+   - New comment/note added
+3. Implement notification triggers in relevant API routes
+4. Add user notification preferences to user profile
+5. Create notification history view
+6. Implement email queue system for reliability
+7. Add unsubscribe functionality
+
+# Test Strategy:
+Test email delivery for various notification types. Verify email content is correct and formatted properly. Test notification preferences work (users only receive emails they've opted into). Test unsubscribe functionality works correctly.

@@ -1,0 +1,18 @@
+# Task ID: 7
+# Title: Develop Basic Itinerary Export
+# Status: pending
+# Dependencies: 4
+# Priority: medium
+# Description: Create functionality to export trip itineraries as PDF or plain text files for offline use.
+# Details:
+1. Install and configure PDF generation library (react-pdf or jsPDF)
+2. Create API route for generating exports:
+   - GET /api/trips/[trip_id]/export?format=pdf|txt
+3. Design PDF template showing trip details and activities in chronological order
+4. Implement plain text export format
+5. Add download buttons to trip detail page
+6. Include trip name, dates, activities, and basic notes in exports
+7. Handle error cases gracefully
+
+# Test Strategy:
+Test PDF generation with various trip configurations (many/few activities, long/short descriptions). Verify PDF content matches trip data. Test text export format. Verify downloads work correctly in different browsers.
