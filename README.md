@@ -33,7 +33,15 @@ A collaborative trip planning application built with Next.js, Tailwind CSS, shad
    npm install
    ```
 
-3. Create a Supabase project and get your API keys from the Supabase dashboard.
+3. Set up Supabase:
+   - Create a new project at [supabase.com](https://supabase.com)
+   - Go to Project Settings > Database > Connection Info
+   - Copy the connection string
+   - Run the SQL migrations:
+     ```bash
+     cd supabase
+     psql "your-connection-string" -f migrations/20240326_create_profiles.sql
+     ```
 
 4. Create a `.env.local` file in the root directory and add your Supabase credentials:
    ```
@@ -54,13 +62,26 @@ A collaborative trip planning application built with Next.js, Tailwind CSS, shad
 - `src/components/` - React components
 - `src/lib/` - Utility functions and configurations
 - `src/hooks/` - Custom React hooks
-- `src/types/` - TypeScript type definitions
+- `supabase/` - Database migrations and schema
 
 ## Development Workflow
 
 1. Create a new branch for your feature
 2. Make your changes
 3. Submit a pull request
+
+## Database Schema
+
+### Profiles Table
+- `id` (uuid, primary key) - References auth.users
+- `name` (text) - User's full name
+- `username` (text, unique) - User's unique username
+- `bio` (text) - Optional user bio
+- `email_notifications` (boolean) - Email notification preferences
+- `theme` (text) - UI theme preference
+- `language` (text) - Language preference
+- `created_at` (timestamptz) - Record creation timestamp
+- `updated_at` (timestamptz) - Record update timestamp
 
 ## Deployment
 

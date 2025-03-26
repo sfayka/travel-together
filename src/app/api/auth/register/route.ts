@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { hash } from 'bcrypt'
+import { supabase } from '@/lib/supabase'
 
 export async function POST(req: Request) {
   try {
@@ -14,40 +14,63 @@ export async function POST(req: Request) {
       )
     }
 
-    // Hash password
-    const hashedPassword = await hash(password, 10)
-
-    // Store user data (in-memory for now)
-    // In a real app, you would store this in a database
-    const user = {
-      id: Math.random().toString(36).slice(2),
+    // Create user in Supabase Auth
+    const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
-      password: hashedPassword,
-      name,
-      username,
-      bio,
-      preferences: {
-        emailNotifications,
-        theme,
-        language,
+      password,
+      options: {
+        data: {
+          name,
+          username,
+        },
       },
-      createdAt: new Date().toISOString(),
+    })
+
+    if (authError) {
+      console.error('Auth error:', authError)
+      return NextResponse.json(
+        { error: authError.message },
+        { status: 400 }
+      )
     }
 
-    // For now, we'll just return success
-    // In a real app, you would:
-    // 1. Store the user in a database
-    // 2. Send a verification email
-    // 3. Create a session
-    // 4. Return the session token
+    if (!authData.user) {
+      return NextResponse.json(
+        { error: 'User creation failed' },
+        { status: 500 }
+      )
+    }
+
+    // Store additional user data in profiles table
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .insert({
+        id: authData.user.id,
+        name,
+        username,
+        bio,
+        email_notifications: emailNotifications,
+        theme,
+        language,
+      })
+
+    if (profileError) {
+      console.error('Profile error:', profileError)
+      // Delete the auth user if profile creation fails
+      await supabase.auth.admin.deleteUser(authData.user.id)
+      return NextResponse.json(
+        { error: 'Failed to create user profile' },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({
       message: 'Registration successful',
       user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        username: user.username,
+        id: authData.user.id,
+        email: authData.user.email,
+        name,
+        username,
       }
     })
   } catch (error) {
