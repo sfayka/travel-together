@@ -1,16 +1,14 @@
 'use client'
 
-import { CalendarDaysIcon, MapPinIcon, CurrencyDollarIcon, UsersIcon } from '@heroicons/react/24/outline'
-import DestinationAutocomplete from '@/components/DestinationAutocomplete'
 import ActivityList from '@/components/ActivityList'
 import CollaboratorList from '@/components/CollaboratorList'
 import { useTripForm } from '@/hooks/useTripForm'
 
-export default function CreateTrip() {
-  const { 
-    formData, 
-    errors, 
-    handleChange, 
+export default function NewTripPage() {
+  const {
+    formData,
+    errors,
+    handleChange,
     handleSubmit,
     handleActivityAdd,
     handleActivityUpdate,
@@ -22,7 +20,7 @@ export default function CreateTrip() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="bg-white shadow sm:rounded-lg">
           <div className="px-4 py-5 sm:p-6">
             <h1 className="text-2xl font-semibold leading-6 text-gray-900 mb-6">Create a New Trip</h1>
@@ -57,9 +55,16 @@ export default function CreateTrip() {
                   Destination
                 </label>
                 <div className="mt-2">
-                  <DestinationAutocomplete
-                    selectedPlace={formData.destination}
-                    onPlaceSelect={(place) => handleChange({ target: { name: 'destination', value: place } })}
+                  <input
+                    type="text"
+                    name="destination"
+                    id="destination"
+                    value={formData.destination}
+                    onChange={handleChange}
+                    className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ${
+                      errors.destination ? 'ring-red-300' : 'ring-gray-300'
+                    } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+                    placeholder="Paris, France"
                   />
                   {errors.destination && (
                     <p className="mt-2 text-sm text-red-600">{errors.destination}</p>
@@ -174,7 +179,7 @@ export default function CreateTrip() {
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
                       <option value="private">Private</option>
-                      <option value="shared">Shared with Collaborators</option>
+                      <option value="shared">Shared</option>
                       <option value="public">Public</option>
                     </select>
                   </div>
@@ -182,7 +187,7 @@ export default function CreateTrip() {
 
                 <div>
                   <label htmlFor="budget" className="block text-sm font-medium leading-6 text-gray-900">
-                    Estimated Budget
+                    Budget
                   </label>
                   <div className="mt-2">
                     <div className="relative rounded-md shadow-sm">
@@ -210,13 +215,6 @@ export default function CreateTrip() {
 
               {/* Submit Button */}
               <div className="mt-6 flex items-center justify-end gap-x-6">
-                <button
-                  type="button"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                  onClick={() => window.history.back()}
-                >
-                  Cancel
-                </button>
                 <button
                   type="submit"
                   className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

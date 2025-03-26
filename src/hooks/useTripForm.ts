@@ -1,16 +1,6 @@
 import { useState, FormEvent, ChangeEvent } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-export interface Place {
-  placeId: string
-  name: string
-  address: string
-  location: {
-    lat: number
-    lng: number
-  }
-}
-
 export interface Activity {
   id: string
   name: string
@@ -29,7 +19,7 @@ export interface Collaborator {
 
 export interface TripFormData {
   name: string
-  destination: Place | null
+  destination: string
   startDate: string
   endDate: string
   description: string
@@ -51,7 +41,7 @@ export interface TripFormErrors {
 
 const initialFormData: TripFormData = {
   name: '',
-  destination: null,
+  destination: '',
   startDate: '',
   endDate: '',
   description: '',
@@ -66,13 +56,13 @@ export function useTripForm() {
   const [errors, setErrors] = useState<TripFormErrors>({})
 
   const validateForm = (): boolean => {
-    const newErrors: TripFormErrors = {}
+    const newErrors: { [key: string]: string } = {}
 
     if (!formData.name.trim()) {
       newErrors.name = 'Trip name is required'
     }
 
-    if (!formData.destination) {
+    if (!formData.destination.trim()) {
       newErrors.destination = 'Destination is required'
     }
 
@@ -121,8 +111,12 @@ export function useTripForm() {
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-    if (errors[name as keyof TripFormErrors]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }))
+    if (errors[name]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev }
+        delete newErrors[name]
+        return newErrors
+      })
     }
   }
 

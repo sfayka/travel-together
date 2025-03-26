@@ -7,7 +7,7 @@ interface Collaborator {
 
 interface Props {
   collaborators: Collaborator[]
-  errors?: { [key: string]: string }
+  errors?: { [key: string]: string | undefined }
   onAdd: () => void
   onUpdate: (index: number, field: keyof Collaborator, value: string) => void
   onRemove: (index: number) => void

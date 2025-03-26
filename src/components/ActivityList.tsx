@@ -15,7 +15,7 @@ interface Props {
   activities: Activity[]
   startDate: string
   endDate: string
-  errors?: { [key: string]: string }
+  errors?: { [key: string]: string | undefined }
   onAdd: () => void
   onUpdate: (index: number, field: keyof Activity, value: string) => void
   onRemove: (index: number) => void
