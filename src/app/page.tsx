@@ -8,16 +8,16 @@ export default function Home() {
         <p className="text-xl mb-8">Plan and organize trips with friends and family</p>
         <div className="flex gap-4">
           <Link
-            href="/login"
+            href="/register"
             className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500"
           >
             Get Started
           </Link>
           <Link
-            href="/about"
+            href="/login"
             className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-100"
           >
-            Learn More
+            Sign In
           </Link>
         </div>
       </div>
